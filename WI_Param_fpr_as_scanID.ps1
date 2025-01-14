@@ -125,6 +125,7 @@ function Download-ScanResults {
     Write-Host ("Downloading the result file (fpr)...")
     Invoke-RestMethod -Method GET -OutFile $path -Uri $fprurl
     Write-Host -ForegroundColor Green ("Result file (fpr) download done!") `n
+    Write-Host "Downloaded FPR to: $path"  # Print the path to console
 
     return $path
 }
@@ -136,6 +137,7 @@ function Upload-ScanResults {
     )
 
     Write-Host ("Starting Upload to SSC...")
+    Write-Host "Uploading FPR file from: $fprPath"  # Print the path to console
     $response = fortifyclient -url $sscURL -applicationVersionID $applicationVersionID -authtoken $sscToken uploadFPR -f $fprPath
     Write-Host -ForegroundColor Green ("Finished! Scan Results are now available in the Software Security Center!")
 }
